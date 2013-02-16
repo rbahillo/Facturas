@@ -2,6 +2,8 @@ package com.concepto
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import com.facturas.Factura;
+
 class ConceptoController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -18,6 +20,10 @@ class ConceptoController {
     def create() {
         [conceptoInstance: new Concepto(params)]
     }
+	
+	def createPlain() {
+		[conceptoInstance: new Concepto(params)]
+	}
 
     def save() {
         def conceptoInstance = new Concepto(params)
@@ -51,6 +57,18 @@ class ConceptoController {
 
         [conceptoInstance: conceptoInstance]
     }
+	
+	def editPlain() {
+		def id = new Integer(params.id)
+		def facturaInstance = (Factura)session.getAttribute("factura")
+		def conceptoInstance = null
+		facturaInstance.conceptos.eachWithIndex {concepto, idx ->
+			if(idx==id){
+				conceptoInstance=concepto
+			}
+		}
+		[conceptoInstance: conceptoInstance]
+	}
 
     def update(Long id, Long version) {
         def conceptoInstance = Concepto.get(id)

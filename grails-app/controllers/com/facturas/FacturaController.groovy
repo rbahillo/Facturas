@@ -1,6 +1,12 @@
 package com.facturas
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.dao.DataIntegrityViolationException
+
+import com.concepto.Concepto
+import com.impuestos.Iva;
+
 
 class FacturaController {
 
@@ -16,10 +22,87 @@ class FacturaController {
     }
 
     def create() {
-        [facturaInstance: new Factura(params)]
+		def facturaInstance = new Factura(params)
+		session.setAttribute("factura", facturaInstance)
+        [facturaInstance: facturaInstance]
     }
+	
+	def actualizaConceptos() {
+		def facturaInstance = session.getAttribute("factura")
+		if(facturaInstance==null)
+			facturaInstance=new Factura(params)
+		session.setAttribute("factura", facturaInstance)
+		render(view: "create", model: [facturaInstance: facturaInstance])
+	}
+	
+	def addConcepto(){
+		double valor = new Double(params.valor);
+		String conceptoS = params.concepto;
+		if(valor==0){
+			flash.message = message(code: 'addConcept.failed.value.message', args: [])
+		}
+		else if(conceptoS==null || conceptoS.length()==0){
+			flash.message = message(code: 'addConcept.failed.content.message', args: [])
+		}
+		else{
+			int ivaId = new Integer(params.ivaId);
+			Iva iva = Iva.get(ivaId);
+			
+			def concepto = new Concepto(params)
+			if(params.included=='false'){
+				valor=valor+((valor*iva.valor)/100)
+				concepto.valor=valor
+			}
+			concepto.iva=iva
+			def facturaInstance = (Factura)session.getAttribute("factura")
+			facturaInstance.addToConceptos(concepto)
+		}
+	}
+	
+	def editConcepto(){
+		double valor = new Double(params.valor);
+		String conceptoS = params.concepto;
+		if(valor==0){
+			flash.message = message(code: 'addConcept.failed.value.message', args: [])
+		}
+		else if(conceptoS==null || conceptoS.length()==0){
+			flash.message = message(code: 'addConcept.failed.content.message', args: [])
+		}
+		else{
+			def id = new Integer(params.idx)
+			int ivaId = new Integer(params.ivaId);
+			Iva iva = Iva.get(ivaId);
+			
+			def conceptoInstance = new Concepto(params)
+			if(params.included=='false'){
+				valor=valor+((valor*iva.valor)/100)
+				conceptoInstance.valor=valor
+			}
+			conceptoInstance.iva=iva
+			def facturaInstance = (Factura)session.getAttribute("factura")
+			facturaInstance.conceptos.eachWithIndex {conceptoIt, idx ->
+				if(idx==id){
+					facturaInstance.removeFromConceptos(conceptoIt)
+				}
+			}
+			facturaInstance.addToConceptos(conceptoInstance)
+		}
+	}
+	
+	def deleteConcepto(){
+		def id = new Integer(params.idx)
+		def facturaInstance = (Factura)session.getAttribute("factura")
+		facturaInstance.conceptos.eachWithIndex {conceptoIt, idx ->
+			if(idx==id){
+				facturaInstance.removeFromConceptos(conceptoIt)
+			}
+		}
+	}
 
     def save() {
+		String fecha = params.get("fecha")
+		def plainFormatter = new SimpleDateFormat("dd/mm/yyyy").parse(fecha)
+		params.put("fecha", plainFormatter)
         def facturaInstance = new Factura(params)
         if (!facturaInstance.save(flush: true)) {
             render(view: "create", model: [facturaInstance: facturaInstance])

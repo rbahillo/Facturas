@@ -41,6 +41,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${conceptoInstance?.iva}">
+				<li class="fieldcontain">
+					<span id="iva-label" class="property-label"><g:message code="concepto.iva.label" default="Iva" /></span>
+					
+						<span class="property-value" aria-labelledby="iva-label"><g:link controller="iva" action="show" id="${conceptoInstance?.iva?.id}">${conceptoInstance?.iva?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

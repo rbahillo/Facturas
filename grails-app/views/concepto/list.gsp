@@ -28,6 +28,8 @@
 					
 						<g:sortableColumn property="valor" title="${message(code: 'concepto.valor.label', default: 'Valor')}" />
 					
+						<th><g:message code="concepto.iva.label" default="Iva" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -37,6 +39,8 @@
 						<td><g:link action="show" id="${conceptoInstance.id}">${fieldValue(bean: conceptoInstance, field: "concepto")}</g:link></td>
 					
 						<td>${fieldValue(bean: conceptoInstance, field: "valor")}</td>
+					
+						<td>${fieldValue(bean: conceptoInstance, field: "iva")}</td>
 					
 					</tr>
 				</g:each>

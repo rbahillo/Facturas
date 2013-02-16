@@ -239,6 +239,18 @@ fieldset,
 	margin-left: 27%;
 }
 
+.fieldcontain div,
+.fieldcontain .box {
+	color:#fff; padding: 5px;
+	height: 340px;
+	margin-top: 5px;
+	margin-right: auto;
+	margin-bottom: 5px;
+	margin-left: auto;
+	border: 1px solid #d0d0d0;
+	overflow: scroll;
+}
+
 label {
 	cursor: pointer;
 	display: inline-block;
@@ -551,6 +563,32 @@ th:hover, tr:hover {
 
 .buttons input:hover, .buttons input:focus,
 .buttons a:hover, .buttons a:focus {
+	background-color: #999999;
+	color: #ffffff;
+	outline: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+	   -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+}
+
+.buttons div {
+	background-color: transparent;
+	border: 0;
+	color: #666666;
+	cursor: pointer;
+	display: inline-block;
+	margin: 0 0.25em 0;
+	overflow: visible;
+	padding: 0.25em 0.7em;
+	text-decoration: none;
+
+	   -moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	        border-radius: 0.3em;
+}
+
+.buttons div:hover, .buttons div:focus {
 	background-color: #999999;
 	color: #ffffff;
 	outline: none;

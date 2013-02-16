@@ -7,10 +7,10 @@ import com.impuestos.Iva;
 class Factura {
 	
 	Integer nFactura;
-	Calendar fecha;
+	Date fecha;
 	Cliente cliente;
 	static hasMany = [conceptos: Concepto]
-	Iva iva;
+	double iva;
 	double total;
 	
     static constraints = {
