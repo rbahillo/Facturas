@@ -48,7 +48,7 @@ body {
 }
 
 #grailsLogo {
-	background-color: #abbf78;
+	
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -65,7 +65,7 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #48802c;
+	color: rgb(204, 48, 79);;
 }
 
 a:hover, a:active {
@@ -73,7 +73,7 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #48802c;
+	color: rgb(204, 48, 79);;
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
@@ -108,7 +108,6 @@ img {
 }
 
 .footer {
-	background: #abbf78;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -241,7 +240,7 @@ fieldset,
 
 .fieldcontain div,
 .fieldcontain .box {
-	color:#fff; padding: 5px;
+	padding: 5px;
 	height: 340px;
 	margin-top: 5px;
 	margin-right: auto;
@@ -273,7 +272,7 @@ select[multiple] {
 }
 
 textarea {
-	width: 250px;
+	width: 350px;
 	height: 150px;
 	overflow: auto; /* IE always renders vertical scrollbar without this */
 	vertical-align: top;
@@ -295,7 +294,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .required-indicator {
-	color: #48802C;
+	color: rgb(204, 48, 79);;
 	display: inline-block;
 	font-weight: bold;
 	margin-left: 0.3em;
@@ -488,7 +487,7 @@ th.desc a {
 }
 
 th:hover, tr:hover {
-	background: #E1F2B6;
+	background: rgb(236, 120, 143);
 }
 
 /* PAGINATION */
@@ -588,6 +587,65 @@ th:hover, tr:hover {
 	        border-radius: 0.3em;
 }
 
+.buttonsSearch {
+	border-top: 1px solid #f79797;
+   background: #d66565;
+   background: -webkit-gradient(linear, left top, left bottom, from(#f50505), to(#d66565));
+   background: -webkit-linear-gradient(top, #f50505, #d66565);
+   background: -moz-linear-gradient(top, #f50505, #d66565);
+   background: -ms-linear-gradient(top, #f50505, #d66565);
+   background: -o-linear-gradient(top, #f50505, #d66565);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+	width: 101px;
+}
+
+.buttonsSearchDisabled {
+	border-top: 1px solid #8c8e8f;
+   background: #7d7f80;
+   background: -webkit-gradient(linear, left top, left bottom, from(#6c6e70), to(#7d7f80));
+   background: -webkit-linear-gradient(top, #6c6e70, #7d7f80);
+   background: -moz-linear-gradient(top, #6c6e70, #7d7f80);
+   background: -ms-linear-gradient(top, #6c6e70, #7d7f80);
+   background: -o-linear-gradient(top, #6c6e70, #7d7f80);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   width: 101px;
+}
+
+.buttonsSearch:hover {
+   border-top-color: #782828;
+   background: #782828;
+   color: #ccc;
+   }
+.buttonsSearch:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+
+
 .buttons div:hover, .buttons div:focus {
 	background-color: #999999;
 	color: #ffffff;
@@ -605,14 +663,14 @@ th:hover, tr:hover {
 	text-decoration: underline;
 }
 
-.buttons .delete, .buttons .edit, .buttons .save {
+.buttons .delete, .buttons .edit, .buttons .save, .buttons .pdf {
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
 }
 
-.ie6 .buttons input.delete, .ie6 .buttons input.edit, .ie6 .buttons input.save,
-.ie7 .buttons input.delete, .ie7 .buttons input.edit, .ie7 .buttons input.save {
+.ie6 .buttons input.delete, .ie6 .buttons input.edit, .ie6 .buttons input.save, .ie6 .buttons input.pdf,
+.ie7 .buttons input.delete, .ie7 .buttons input.edit, .ie7 .buttons input.save, .ie7 .buttons input.pdf {
 	padding-left: 36px;
 }
 
@@ -628,7 +686,28 @@ th:hover, tr:hover {
 	background-image: url(../images/skin/database_save.png);
 }
 
+.buttons .pdf {
+	background-image: url(../images/skin/database_save.png);
+}
+
 a.skip {
 	position: absolute;
 	left: -9999px;
+}
+
+form.factura {
+	background-color: transparent;
+	border: 0;
+	color: #666666;
+	cursor: pointer;
+	display: inline-block;
+	margin: 0 0.25em 0;
+	overflow: visible;
+	padding: 0.25em 0.7em;
+	text-decoration: none;
+
+	   -moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	        border-radius: 0.3em;
+	
 }

@@ -1,5 +1,7 @@
 package com.clientes
 
+import grails.converters.JSON;
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class ClienteController {
@@ -99,4 +101,39 @@ class ClienteController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def searchList(){
+		def query = {
+			or {
+				like("nif", "${params.clienteSearch}%") // term is the parameter send by jQuery autocomplete
+				like("empresa", "${params.clienteSearch}%")
+				like("nombre", "${params.clienteSearch}%")
+				like("apellidos", "${params.clienteSearch}%")
+			   }
+		  }
+		  def clist = Cliente.createCriteria().list(query) // execute  to the get the list of companies
+		  render(view: "list", model:[clienteInstanceList: clist, clienteInstanceTotal: clist.size()])
+	}
+	
+	def search(){
+		def query = {
+			or {
+				like("nif", "${params.term}%") // term is the parameter send by jQuery autocomplete
+				like("empresa", "${params.term}%")
+				like("nombre", "${params.term}%")
+				like("apellidos", "${params.term}%")
+			   }
+		  }
+		  def clist = Cliente.createCriteria().list(query) // execute  to the get the list of companies
+		  def clienteSelectList = [] // to add each company details
+		  clist.each {
+			   def clienteMap = [:] // add to map. jQuery autocomplete expects the JSON object to be with id/label/value.
+			   clienteMap.put("id", it.id)
+			   clienteMap.put("display", it.display)
+			   clienteMap.put("label", it.display)
+			   clienteMap.put("value", it.display)
+			   clienteSelectList.add(clienteMap) // add to the arraylist
+			}
+		  render clienteSelectList as JSON
+	}
 }

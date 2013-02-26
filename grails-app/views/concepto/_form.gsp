@@ -10,12 +10,20 @@
 	<g:textArea  name="concepto" required="" value="${conceptoInstance?.concepto}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: conceptoInstance, field: 'valor', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: conceptoInstance, field: 'unidades', 'error')} required">
 	<label for="valor">
-		<g:message code="concepto.valor.label" default="Valor" />
+		<g:message code="concepto.unidades.label" default="Unidades" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="valor" value="${fieldValue(bean: conceptoInstance, field: 'valor')}" required=""/>
+	<g:textField name="unidades" value="${fieldValue(bean: conceptoInstance, field: 'unidades')}" required=""/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: conceptoInstance, field: 'valorUnitario', 'error')} required">
+	<label for="valor">
+		<g:message code="concepto.valorUnitario.label" default="ValorUnitario" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="valorUnitario" value="${fieldValue(bean: conceptoInstance, field: 'valorUnitario')}" required=""/>
 </div>
 
 
@@ -40,10 +48,12 @@
 		<g:message code="concepto.iva.incluido" default="Iva Incluido" />
 		<span class="required-indicator">*</span>
 	</label>
+
 	<span class="required-indicator"><g:message code="concepto.iva.incluido.si" default="Si" /></span>
 	<g:radio name="included" value="true" checked="true"/>
 	<span class="required-indicator"><g:message code="concepto.iva.incluido.no" default="No" /></span>
-	<g:radio name="included" value="false"/>
+	<g:radio name="included" value="false" />
+	
 </div>
 <g:hiddenField name="idx" value="${params.id}"/>
 

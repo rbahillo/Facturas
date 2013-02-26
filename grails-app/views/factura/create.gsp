@@ -9,24 +9,6 @@
 		<r:require module="jquery-ui"/>
     	<jqui:resources theme="darkness" />
     	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-    	<script type="text/javascript">
-        $(document).ready(function()
-        {
-          $("#datepicker").datepicker({
-
-        	  dateFormat : 'dd/mm/yyyy', //este formato lo uso xq asi se guarda en mi DB!! tu lo puedes cambiar como mas te guste
-        	  showAnim : 'slideDown',
-        	  changeMonth: true, //muestra una lista de los meses
-        	  changeYear: true, //muestra una lista de los años
-        	  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-        	  monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-        	  dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sabado'],
-        	  dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-        	  dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-        	  weekHeader: 'Sm'
-        	  });
-        })
-    </script>
 	</head>
 	<body>
 		<a href="#create-factura" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

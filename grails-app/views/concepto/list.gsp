@@ -26,9 +26,15 @@
 					
 						<g:sortableColumn property="concepto" title="${message(code: 'concepto.concepto.label', default: 'Concepto')}" />
 					
-						<g:sortableColumn property="valor" title="${message(code: 'concepto.valor.label', default: 'Valor')}" />
+						<g:sortableColumn property="valorUnitario" title="${message(code: 'concepto.valorUnitario.label', default: 'Valor Unitario')}" />
 					
 						<th><g:message code="concepto.iva.label" default="Iva" /></th>
+					
+						<g:sortableColumn property="total" title="${message(code: 'concepto.total.label', default: 'Total')}" />
+					
+						<g:sortableColumn property="unidades" title="${message(code: 'concepto.unidades.label', default: 'Unidades')}" />
+					
+						<g:sortableColumn property="valorIva" title="${message(code: 'concepto.valorIva.label', default: 'Valor Iva')}" />
 					
 					</tr>
 				</thead>
@@ -38,9 +44,15 @@
 					
 						<td><g:link action="show" id="${conceptoInstance.id}">${fieldValue(bean: conceptoInstance, field: "concepto")}</g:link></td>
 					
-						<td>${fieldValue(bean: conceptoInstance, field: "valor")}</td>
+						<td>${fieldValue(bean: conceptoInstance, field: "valorUnitario")}</td>
 					
 						<td>${fieldValue(bean: conceptoInstance, field: "iva")}</td>
+					
+						<td>${fieldValue(bean: conceptoInstance, field: "total")}</td>
+					
+						<td>${fieldValue(bean: conceptoInstance, field: "unidades")}</td>
+					
+						<td>${fieldValue(bean: conceptoInstance, field: "valorIva")}</td>
 					
 					</tr>
 				</g:each>

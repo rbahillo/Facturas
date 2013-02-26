@@ -1,10 +1,15 @@
 <%@ page import="com.facturas.Factura" %>
+<%@ page import="org.codehaus.groovy.grails.commons.ApplicationHolder" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'factura.label', default: 'Factura')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+		<g:javascript library="jquery" plugin="jquery" />
+		<r:require module="jquery-ui"/>
+    	<jqui:resources theme="darkness" />
+    	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 	</head>
 	<body>
 		<a href="#edit-factura" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -27,17 +32,39 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form method="post" >
+			<g:form method="post">
 				<g:hiddenField name="id" value="${facturaInstance?.id}" />
 				<g:hiddenField name="version" value="${facturaInstance?.version}" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+				<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" onclick="submitForm(_action_update)"/>
+				<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
+			<g:if test="${session.getAttribute("imprimir")}">
+				<fieldset class="buttons">
+						<g:jasperForm jasper="factura" format="PDF" name="${facturaInstance?.nFactura}/${facturaInstance?.year}" class="factura" delimiter=" " description="${message(code: 'default.button.imprimir.label', default: 'Imprimir')}" controller="jasper" action="index">
+							<input type="hidden" name="nombre" value="${facturaInstance?.cliente?.nombre}" />
+							<input type="hidden" name="nFactura" value="${facturaInstance?.nFactura}/${facturaInstance?.year}" />
+							<input type="hidden" name="dia" value="<g:formatDate format="dd/MM/yyyy" date="${facturaInstance?.fecha}"/>" />
+							<input type="hidden" name="empresa" value="${facturaInstance?.cliente?.empresa}" />
+							<input type="hidden" name="direccion" value="${facturaInstance?.cliente?.direccion}" />
+							<input type="hidden" name="poblacion" value="${facturaInstance?.cliente?.poblacion}" />
+							<input type="hidden" name="cp" value="${facturaInstance?.cliente?.cp}" />
+							<input type="hidden" name="provincia" value="${facturaInstance?.cliente?.provincia}" />
+							<input type="hidden" name="nif" value="${facturaInstance?.cliente?.nif}" />
+							<input type="hidden" name="titulo" value="${facturaInstance?.titulo}" />
+							<input type="hidden" name="subtotal" value="<g:formatNumber number="${facturaInstance?.subTotal}" format="0.00€" />" />
+							<input type="hidden" name="iva" value="<g:formatNumber number="${facturaInstance?.iva}" format="0.00€" />" />
+							<input type="hidden" name="total" value="<g:formatNumber number="${facturaInstance?.total}" format="0.00€" />" />
+							<input type="hidden" name="facturaId" value="${facturaInstance?.id}" />
+							<input type="hidden" name="IMAGE_DIR" value="${ApplicationHolder.application.parentContext.servletContext.getRealPath("/images")}/"}/>
+							<g:jasperButton format="pdf" jasper="factura" class="pdf" text="${message(code: 'default.button.imprimir.label', default: 'Imprimir')}"  />
+						</g:jasperForm>
+				</fieldset>
+			</g:if>
 		</div>
 	</body>
 </html>

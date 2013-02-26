@@ -32,11 +32,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${conceptoInstance?.valor}">
+				<g:if test="${conceptoInstance?.valorUnitario}">
 				<li class="fieldcontain">
-					<span id="valor-label" class="property-label"><g:message code="concepto.valor.label" default="Valor" /></span>
+					<span id="valorUnitario-label" class="property-label"><g:message code="concepto.valorUnitario.label" default="Valor Unitario" /></span>
 					
-						<span class="property-value" aria-labelledby="valor-label"><g:fieldValue bean="${conceptoInstance}" field="valor"/></span>
+						<span class="property-value" aria-labelledby="valorUnitario-label"><g:fieldValue bean="${conceptoInstance}" field="valorUnitario"/></span>
 					
 				</li>
 				</g:if>
@@ -46,6 +46,33 @@
 					<span id="iva-label" class="property-label"><g:message code="concepto.iva.label" default="Iva" /></span>
 					
 						<span class="property-value" aria-labelledby="iva-label"><g:link controller="iva" action="show" id="${conceptoInstance?.iva?.id}">${conceptoInstance?.iva?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${conceptoInstance?.total}">
+				<li class="fieldcontain">
+					<span id="total-label" class="property-label"><g:message code="concepto.total.label" default="Total" /></span>
+					
+						<span class="property-value" aria-labelledby="total-label"><g:fieldValue bean="${conceptoInstance}" field="total"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${conceptoInstance?.unidades}">
+				<li class="fieldcontain">
+					<span id="unidades-label" class="property-label"><g:message code="concepto.unidades.label" default="Unidades" /></span>
+					
+						<span class="property-value" aria-labelledby="unidades-label"><g:fieldValue bean="${conceptoInstance}" field="unidades"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${conceptoInstance?.valorIva}">
+				<li class="fieldcontain">
+					<span id="valorIva-label" class="property-label"><g:message code="concepto.valorIva.label" default="Valor Iva" /></span>
+					
+						<span class="property-value" aria-labelledby="valorIva-label"><g:fieldValue bean="${conceptoInstance}" field="valorIva"/></span>
 					
 				</li>
 				</g:if>

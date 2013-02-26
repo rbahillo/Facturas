@@ -29,4 +29,15 @@ class Cliente {
 		telefono(nullable:true)
 		movil(nullable:true)
     }
+	
+	public String getDisplay(){
+		StringBuffer sb = new StringBuffer()
+		sb.append(nif)
+		sb.append(",")
+		sb.append(empresa)
+		sb.append(",")
+		sb.append(nombre)
+		sb.append(",")
+		sb.append(apellidos)
+	}
 }

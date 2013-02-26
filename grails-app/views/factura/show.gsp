@@ -23,11 +23,20 @@
 			</g:if>
 			<ol class="property-list factura">
 			
+				<g:if test="${facturaInstance?.nFactura}">
+				<li class="fieldcontain">
+					<span id="nFactura-label" class="property-label"><g:message code="factura.nFactura.label" default="NF actura" /></span>
+					
+						<span class="property-value" aria-labelledby="nFactura-label"><g:fieldValue bean="${facturaInstance}" field="nFactura"/>/<g:fieldValue bean="${facturaInstance}" field="year"/></span>
+					
+				</li>
+				</g:if>
+				
 				<g:if test="${facturaInstance?.cliente}">
 				<li class="fieldcontain">
 					<span id="cliente-label" class="property-label"><g:message code="factura.cliente.label" default="Cliente" /></span>
 					
-						<span class="property-value" aria-labelledby="cliente-label"><g:link controller="cliente" action="show" id="${facturaInstance?.cliente?.id}">${facturaInstance?.cliente?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="cliente-label"><g:link controller="cliente" action="show" id="${facturaInstance?.cliente?.id}">${facturaInstance?.cliente?.empresa?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -37,17 +46,8 @@
 					<span id="conceptos-label" class="property-label"><g:message code="factura.conceptos.label" default="Conceptos" /></span>
 					
 						<g:each in="${facturaInstance.conceptos}" var="c">
-						<span class="property-value" aria-labelledby="conceptos-label"><g:link controller="concepto" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="conceptos-label">${c?.concepto.encodeAsHTML()}</span>
 						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${facturaInstance?.fecha}">
-				<li class="fieldcontain">
-					<span id="fecha-label" class="property-label"><g:message code="factura.fecha.label" default="Fecha" /></span>
-					
-						<span class="property-value" aria-labelledby="fecha-label"><g:formatDate date="${facturaInstance?.fecha}" /></span>
 					
 				</li>
 				</g:if>
@@ -56,19 +56,12 @@
 				<li class="fieldcontain">
 					<span id="iva-label" class="property-label"><g:message code="factura.iva.label" default="Iva" /></span>
 					
-						<span class="property-value" aria-labelledby="iva-label"><g:link controller="iva" action="show" id="${facturaInstance?.iva?.id}">${facturaInstance?.iva?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="iva-label"><g:fieldValue bean="${facturaInstance}" field="iva"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${facturaInstance?.nFactura}">
-				<li class="fieldcontain">
-					<span id="nFactura-label" class="property-label"><g:message code="factura.nFactura.label" default="NF actura" /></span>
-					
-						<span class="property-value" aria-labelledby="nFactura-label"><g:fieldValue bean="${facturaInstance}" field="nFactura"/></span>
-					
-				</li>
-				</g:if>
+				
 			
 				<g:if test="${facturaInstance?.total}">
 				<li class="fieldcontain">
