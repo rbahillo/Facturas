@@ -90,3 +90,6 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 grails.views.javascript.library="jquery"
+
+grails.plugin.cloudfoundry.username="ricky.bahillo@gmail.com"
+grails.plugin.cloudfoundry.password="Opodo123"
