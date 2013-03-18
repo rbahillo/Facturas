@@ -8,7 +8,7 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 		<g:javascript library="jquery" plugin="jquery" />
 		<r:require module="jquery-ui"/>
-    	<jqui:resources theme="darkness" />
+    	
     	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 	</head>
 	<body>

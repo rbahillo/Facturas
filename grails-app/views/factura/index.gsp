@@ -8,7 +8,7 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 		<g:javascript library="jquery" plugin="jquery" />
 		<r:require module="jquery-ui"/>
-    	<jqui:resources theme="darkness" />
+    	
 	</head>
 	<body>
 		<a href="#list-factura" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -17,6 +17,7 @@
 				<li><g:link class="list" action="list" controller="factura"><g:message code="default.list.facturas" default="Gestion de Facturas" /></g:link></li>
 				<li><g:link class="list" action="list" controller="cliente"><g:message code="default.list.cliente" default="Gestion de Clientes"/></g:link></li>
 				<li><g:link class="list" action="list" controller="iva"><g:message code="default.list.iva" default="Gestion de Impuestos" /></g:link></li>
+				<li><g:link class="list" action="list" controller="adminUser"><g:message code="default.list.adminUser" default="Gestion de Usuarios" /></g:link></li>
 			</ul>
 		</div>
 		<div id="list-factura" class="content scaffold-list" role="main">

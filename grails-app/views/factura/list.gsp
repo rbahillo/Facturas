@@ -8,7 +8,7 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 		<g:javascript library="jquery" plugin="jquery" />
 		<r:require module="jquery-ui"/>
-    	<jqui:resources theme="darkness" />
+    	
 	</head>
 	<body>
 		<a href="#list-factura" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

@@ -36,7 +36,7 @@ $("#dialogEditConcepto").dialog({
  
 $("#addConcept_btn").bind("click", function() {
     $.ajax({
-        url:'/concepto/createPlain',
+        url:'/Facturas/concepto/createPlain',
         success: function(data){
             $("#dialogCreateConcepto").html(data);
             $("#dialogCreateConcepto").dialog("open");
@@ -49,7 +49,7 @@ function editarConcepto(id){
 	        id:id
 	    }
 	$.ajax({
-        url:'/concepto/editPlain',
+        url:'/Facturas/concepto/editPlain',
         data:datosConcepto,
         success: function(data){
             $("#dialogEditConcepto").html(data);
@@ -69,7 +69,7 @@ function actualizarConcepto(){
 	        included: $('input:radio[name=included]:checked').val()
 	    }
 	$.ajax({
-        url:'/factura/addConcepto',
+        url:'/Facturas/factura/addConcepto',
         data:datosConcepto,
         success: function(response){
         		
@@ -89,14 +89,14 @@ function editarConceptoFromModal(){
 	        included: $('input:radio[name=included]:checked').val()
 	    }
 	$.ajax({
-        url:'/factura/editConcepto',
+        url:'/Facturas/factura/editConcepto',
         data:datosConcepto,
         success: function(response){
 
         }
 	});
 	$('#dialogCreateConcepto').dialog('close');
-	window.location='/factura/actualizaConceptos';
+	window.location='/Facturas/factura/actualizaConceptos';
 }
 
 function borrarConcepto(){
@@ -104,14 +104,14 @@ function borrarConcepto(){
 			idx: $('#idx').val()
 	    }
 	$.ajax({
-        url:'/factura/deleteConcepto',
+        url:'/Facturas/factura/deleteConcepto',
         data:datosConcepto,
         success: function(response){
 
         }
 	});
 	$('#dialogCreateConcepto').dialog('close');
-	window.location='/factura/actualizaConceptos';
+	window.location='/Facturas/factura/actualizaConceptos';
 }
 
 function updateTitulo(){
@@ -119,13 +119,13 @@ function updateTitulo(){
 			titulo: $('#titulo').val()
 	    }
 	$.ajax({
-        url:'/factura/addTitulo',
+        url:'/Facturas/factura/addTitulo',
         data:datosConcepto,
         success: function(response){
 
         }
 	});
-	window.location='/factura/actualizaConceptos';
+	window.location='/Facturas/factura/actualizaConceptos';
 }
 	
 
@@ -135,7 +135,7 @@ function updateTitulo(){
 					fecha: date
 			    }
 		  $.ajax({
-		        url:'/factura/updateNFacturaFecha',
+		        url:'/Facturas/factura/updateNFacturaFecha',
 		        data:datosFecha,
 		        success: function(response){
 		        	$('#nFacturaS').val(response);
@@ -157,7 +157,7 @@ function updateTitulo(){
  $("#cliente").autocomplete({
 	  source: function(request, response){
 	   $.ajax({
-	    url: "/cliente/search", // remote datasource
+	    url: "/Facturas/cliente/search", // remote datasource
 	    data: request,
 	    success: function(data){
 	     response(data); // set the response
@@ -177,7 +177,7 @@ function updateTitulo(){
 	        clientId: ui.item.id
 	    }
 	   $.ajax({
-	        url:'/factura/addCliente',
+	        url:'/Facturas/factura/addCliente',
 	        data:datosCliente,
 	        success: function(response){
 
@@ -189,7 +189,7 @@ function updateTitulo(){
  $("#clienteNoUpdate").autocomplete({
 	  source: function(request, response){
 	   $.ajax({
-	    url: "/cliente/search", // remote datasource
+	    url: "/Facturas/cliente/search", // remote datasource
 	    data: request,
 	    success: function(data){
 	     response(data); // set the response

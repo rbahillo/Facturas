@@ -92,4 +92,7 @@ log4j = {
 grails.views.javascript.library="jquery"
 
 grails.plugin.cloudfoundry.username="ricky.bahillo@gmail.com"
-grails.plugin.cloudfoundry.password="Opodo123"
+grails.plugin.cloudfoundry.password="blpmjpap"
+grails.plugin.cloudfoundry.target = "http://api.aws.af.cm"
+grails.app.context = "/"
+

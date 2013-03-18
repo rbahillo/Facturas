@@ -8,6 +8,9 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}?id=393" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 		<g:javascript library="application"/>
+		<g:javascript library="jquery" plugin="jquery" />
+		<r:require module="jquery-ui"/>
+    	
 		<g:set var="entityName" value="${message(code: 'concepto.label', default: 'Concepto')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 		<r:layoutResources />

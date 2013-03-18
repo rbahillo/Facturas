@@ -1,0 +1,19 @@
+package facturas
+
+
+
+import grails.test.mixin.*
+import org.junit.*
+
+import com.admin.AdminUser;
+
+/**
+ * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
+ */
+@TestFor(AdminUser)
+class AdminUserTests {
+
+    void testSomething() {
+       fail "Implement me"
+    }
+}

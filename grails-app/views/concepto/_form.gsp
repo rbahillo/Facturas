@@ -33,13 +33,22 @@
 		<g:message code="concepto.iva.label" default="Iva" />
 		<span class="required-indicator">*</span>
 	</label>
+	<g:set var="ivaSelected" value="${null}" />
+	<g:if test="${conceptoInstance?.iva!=null}">
+		<g:set var="ivaSelected" value="${conceptoInstance.iva.id}" />
+	</g:if>
 	<g:each in="${com.impuestos.Iva.list()}" status="i" var="ivaInstance">
 			<span class="required-indicator">${fieldValue(bean: ivaInstance, field: "valor")}%</span>
-			<g:if test="${ivaInstance.ivaPorDefecto}">
+			<g:if test="${ivaInstance.id==ivaSelected}">
 				<g:radio name="ivaId" value="${fieldValue(bean: ivaInstance, field: "id")}" checked="true"/>	
-			</g:if>	
+			</g:if>
 			<g:else>
-				<g:radio name="ivaId" value="${fieldValue(bean: ivaInstance, field: "id")}"/>
+				<g:if test="${ivaInstance.ivaPorDefecto&&ivaSelected==null}">
+					<g:radio name="ivaId" value="${fieldValue(bean: ivaInstance, field: "id")}" checked="true"/>	
+				</g:if>	
+				<g:else>
+					<g:radio name="ivaId" value="${fieldValue(bean: ivaInstance, field: "id")}"/>
+				</g:else>
 			</g:else>	
 	</g:each>
 </div>

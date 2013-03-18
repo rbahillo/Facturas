@@ -8,7 +8,7 @@
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 		<g:javascript library="jquery" plugin="jquery" />
 		<r:require module="jquery-ui"/>
-    	<jqui:resources theme="darkness" />
+    	
     	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 	</head>
 	<body>
@@ -56,9 +56,13 @@
 							<input type="hidden" name="provincia" value="${facturaInstance?.cliente?.provincia}" />
 							<input type="hidden" name="nif" value="${facturaInstance?.cliente?.nif}" />
 							<input type="hidden" name="titulo" value="${facturaInstance?.titulo}" />
-							<input type="hidden" name="subtotal" value="<g:formatNumber number="${facturaInstance?.subTotal}" format="0.00€" />" />
-							<input type="hidden" name="iva" value="<g:formatNumber number="${facturaInstance?.iva}" format="0.00€" />" />
-							<input type="hidden" name="total" value="<g:formatNumber number="${facturaInstance?.total}" format="0.00€" />" />
+							<input type="hidden" name="subtotal" value="<g:formatNumber number="${facturaInstance?.subTotal}" format="0.00" />" />
+							<g:each var="iva" status="i" in="${facturaInstance?.ivaMap.entrySet()}" var="iva">
+								<input type="hidden" name="iva${i}" value="<g:formatNumber number="${iva.key}" format="0.00" />" />
+								<input type="hidden" name="ivaValor${i}" value="<g:formatNumber number="${iva.value}" format="0.00" />" />
+							</g:each>
+							<input type="hidden" name="iva" value="<g:formatNumber number="${facturaInstance?.iva}" format="0.00" />" />
+							<input type="hidden" name="total" value="<g:formatNumber number="${facturaInstance?.total}" format="0.00" />" />
 							<input type="hidden" name="facturaId" value="${facturaInstance?.id}" />
 							<input type="hidden" name="IMAGE_DIR" value="${ApplicationHolder.application.parentContext.servletContext.getRealPath("/images")}/"}/>
 							<g:jasperButton format="pdf" jasper="factura" class="pdf" text="${message(code: 'default.button.imprimir.label', default: 'Imprimir')}"  />

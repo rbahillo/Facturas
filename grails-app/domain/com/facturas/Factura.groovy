@@ -56,6 +56,19 @@ class Factura {
 		return res;
 	}
 	
+	public Map<Double, Double> getIvaMap(){
+		Map<Double, Double> res= new HashMap<Double, Double>();
+		conceptos.each {
+			Double tipoIva = it.iva.valor
+			def iva=res.get(tipoIva)
+			if(iva==null)
+				iva=0
+			iva+=it.valorIva	
+			res.put(tipoIva, iva)
+		}
+		return res
+	}
+	
 	public String getYear(){
 		SimpleDateFormat formatNowYear = new SimpleDateFormat("yyyy");
 		String currentYear = "yyyy"

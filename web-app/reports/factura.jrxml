@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura2" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c6c028f1-c897-4b31-acd2-06dc7f5e9793">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="23"/>
+	<property name="ireport.y" value="118"/>
 	<parameter name="nif" class="java.lang.String"/>
 	<parameter name="empresa" class="java.lang.String"/>
 	<parameter name="direccion" class="java.lang.String"/>
@@ -18,6 +18,12 @@
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="dia" class="java.lang.String"/>
 	<parameter name="IMAGE_DIR" class="java.lang.String"/>
+	<parameter name="iva0" class="java.lang.String"/>
+	<parameter name="iva1" class="java.lang.String"/>
+	<parameter name="iva2" class="java.lang.String"/>
+	<parameter name="ivaValor0" class="java.lang.String"/>
+	<parameter name="ivaValor1" class="java.lang.String"/>
+	<parameter name="ivaValor2" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select c.* from factura_concepto, concepto c where factura_conceptos_id = $P{facturaId} and id=concepto_id]]>
 	</queryString>
@@ -289,9 +295,9 @@
 		</band>
 	</pageFooter>
 	<lastPageFooter>
-		<band height="94">
+		<band height="186">
 			<line>
-				<reportElement uuid="f5fdf181-fa7d-45c4-b8fc-7b423c5c6a9d" x="274" y="89" width="275" height="1"/>
+				<reportElement uuid="f5fdf181-fa7d-45c4-b8fc-7b423c5c6a9d" x="274" y="126" width="275" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.25" lineStyle="Double"/>
 				</graphicElement>
@@ -304,14 +310,16 @@
 				<text><![CDATA[Subtotal:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="5dba5d7c-ace4-48ca-b01e-f3f965bedfe2" x="349" y="35" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement uuid="5dba5d7c-ace4-48ca-b01e-f3f965bedfe2" x="349" y="36" width="39" height="20">
+					<printWhenExpression><![CDATA[$P{iva0}!=null && !$P{iva0}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Serif" isBold="true"/>
 				</textElement>
-				<text><![CDATA[IVA:]]></text>
+				<text><![CDATA[IVA(]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="dbfe3d1a-c5c2-4afa-9fc1-65059657cf85" x="349" y="55" width="100" height="20"/>
+				<reportElement uuid="dbfe3d1a-c5c2-4afa-9fc1-65059657cf85" x="349" y="106" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Serif" isBold="true"/>
 				</textElement>
@@ -323,12 +331,14 @@
 				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="0.00€">
-				<reportElement uuid="1479dfd0-3908-463d-a55a-41497f99c0d1" x="449" y="36" width="93" height="20"/>
+				<reportElement uuid="1479dfd0-3908-463d-a55a-41497f99c0d1" x="449" y="36" width="93" height="20">
+					<printWhenExpression><![CDATA[$P{iva0}!=null && !$P{iva0}.isEmpty()]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{iva}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{ivaValor0}]]></textFieldExpression>
 			</textField>
 			<textField pattern="0.00€">
-				<reportElement uuid="0674c0cf-62d6-4eeb-83b2-772cbdef2b15" x="449" y="55" width="93" height="20"/>
+				<reportElement uuid="0674c0cf-62d6-4eeb-83b2-772cbdef2b15" x="449" y="106" width="93" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
 			</textField>
@@ -339,15 +349,126 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement uuid="a1fef5bf-8517-4000-999c-453b0b4e99eb" x="20" y="69" width="80" height="20"/>
+				<reportElement uuid="a1fef5bf-8517-4000-999c-453b0b4e99eb" x="20" y="106" width="80" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="ed89a2d3-761b-4d7e-a126-d22eacf8684a" x="100" y="70" width="40" height="20"/>
+				<reportElement uuid="ed89a2d3-761b-4d7e-a126-d22eacf8684a" x="100" y="107" width="40" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement uuid="ccd9a706-3425-4b21-ad57-cf7b821ede3a" x="542" y="15" width="12" height="21"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[€]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b3ffebad-7448-4935-8388-b0240ff86e3e" x="542" y="36" width="12" height="21">
+					<printWhenExpression><![CDATA[$P{iva0}!=null && !$P{iva0}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[€]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1effa95d-f1e6-470b-80a9-68e164403e41" x="542" y="107" width="12" height="21"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[€]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7b8ef3ee-633b-49db-9a46-d6bbd0b037fd" x="388" y="36" width="31" height="20">
+					<printWhenExpression><![CDATA[$P{iva0}!=null && !$P{iva0}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{iva0}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2207c4bd-bc13-4840-af25-2a80e362ede2" x="419" y="36" width="30" height="20">
+					<printWhenExpression><![CDATA[$P{iva0}!=null && !$P{iva0}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0e81af1a-7db0-46a9-9ce2-2f82cec84bb2" x="349" y="55" width="39" height="20">
+					<printWhenExpression><![CDATA[$P{iva1}!=null && !$P{iva1}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA(]]></text>
+			</staticText>
+			<textField pattern="0.00€">
+				<reportElement uuid="48873e91-6b56-4151-b8c1-5fb52b34b63d" x="449" y="55" width="93" height="20">
+					<printWhenExpression><![CDATA[$P{iva1}!=null && !$P{iva1}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{ivaValor1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="88acfd1b-8028-4f69-86d8-5eba23ced292" x="542" y="57" width="12" height="19">
+					<printWhenExpression><![CDATA[$P{iva1}!=null && !$P{iva1}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[€]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="507aafa2-9d44-47b8-8e02-c1401f26be61" x="388" y="55" width="31" height="20">
+					<printWhenExpression><![CDATA[$P{iva1}!=null && !$P{iva1}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{iva1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3e6c541b-38b8-45ad-86e3-bd2cd4e501d7" x="419" y="55" width="30" height="20">
+					<printWhenExpression><![CDATA[$P{iva1}!=null && !$P{iva1}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="20766ac1-fd3b-4dd4-ba1d-ea9f6c5b16c5" x="349" y="74" width="39" height="20">
+					<printWhenExpression><![CDATA[$P{iva2}!=null && !$P{iva2}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA(]]></text>
+			</staticText>
+			<textField pattern="0.00€">
+				<reportElement uuid="84804841-950c-4b8f-9b41-2d1ae17815d2" x="449" y="74" width="93" height="20">
+					<printWhenExpression><![CDATA[$P{iva2}!=null && !$P{iva2}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{ivaValor2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3fa38e42-4ee8-4432-a401-28895e7c7bf4" x="542" y="75" width="12" height="21">
+					<printWhenExpression><![CDATA[$P{iva2}!=null && !$P{iva2}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[€]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="0d2484de-25d4-46c9-bcb0-32c9808c6544" x="388" y="74" width="31" height="20">
+					<printWhenExpression><![CDATA[$P{iva2}!=null && !$P{iva2}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{iva2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f2b6a0b8-66a6-49b6-b77b-802609b211cd" x="419" y="74" width="30" height="20">
+					<printWhenExpression><![CDATA[$P{iva2}!=null && !$P{iva2}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%):]]></text>
+			</staticText>
 		</band>
 	</lastPageFooter>
 </jasperReport>

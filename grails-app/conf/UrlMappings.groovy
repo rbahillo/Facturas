@@ -7,7 +7,7 @@ class UrlMappings {
 			}
 		}
 
-		"/"(controller:'factura' , action:'index')
+		"/"(controller:'admin' , action:'index')
 		"500"(view:'/error')
 	}
 }

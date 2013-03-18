@@ -27,6 +27,7 @@ class ConceptoController {
 
     def save() {
         def conceptoInstance = new Concepto(params)
+		params.each{println}
         if (!conceptoInstance.save(flush: true)) {
             render(view: "create", model: [conceptoInstance: conceptoInstance])
             return

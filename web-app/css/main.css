@@ -711,3 +711,20 @@ form.factura {
 	        border-radius: 0.3em;
 	
 }
+div.col_profile {
+	float: right;
+	width: 680px;
+	border: 3px solid #fff;
+	margin-right: 20px;
+	margin-left: 5px;
+	background-color: transparent; //
+	background-color: #FAFAFA;
+	background-color /*\**/: #FAFAFA\9;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	box-shadow: 0px 2px 4px #666;
+	-webkit-box-shadow: 0px 1px 3px #999;
+	-moz-box-shadow: 0px 1px 3px #999;
+	behavior: url(/intranetV2/iecss3/PIE.htc);
+}

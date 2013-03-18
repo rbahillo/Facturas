@@ -14,7 +14,6 @@ class FacturaController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index(Integer max) {
-		System.out.println(java.lang.System.getenv("VCAP_SERVICES"));
 		params.max = Math.min(max ?: 10, 100)
 		[facturaInstanceList: Factura.list(params), facturaInstanceTotal: Factura.count()]
     }
@@ -78,7 +77,6 @@ class FacturaController {
 		facturaInstance.fecha=fecha
 		def nFactura=getMaxNFactura(facturaInstance.fecha)
 		session.setAttribute("imprimir", false)
-		System.out.println(nFactura+"/"+facturaInstance.year);
 		render nFactura+"/"+facturaInstance.year
 	}
 	
@@ -274,7 +272,7 @@ class FacturaController {
 		def max = c.list {
 						and{
 							ge("fecha", firstDayOfYear.getTime())
-							le("fecha", firstDayOfYear.getTime())
+							le("fecha", lastDayOfYear.getTime())
 						 }
 						 order('nFactura','desc')
 		}
@@ -282,6 +280,34 @@ class FacturaController {
 		if(max!=null && max.size()!=0)
 			nFactura=max.get(0).nFactura+1
 		return nFactura
+	}
+	
+	def searchByNFactura(Integer max){
+		params.max = Math.min(max ?: 10, 100)
+		def nFacturaS = params.get("nFactura")
+		def nFactura, year
+		(nFactura, year) =  nFacturaS.split ('/')
+		def firstDayOfYear = new GregorianCalendar(new Integer(year), 0, 1)
+		def lastDayOfYear = new GregorianCalendar(new Integer(year), 11, 31)
+		def c = Factura.createCriteria()
+		def facturaInstanceList = c.list {
+			and{
+				ge("fecha", firstDayOfYear.getTime())
+				le("fecha", lastDayOfYear.getTime())
+				eq("nFactura", new Integer(nFactura))
+			 }
+			 order('nFactura','desc')
+		}
+		if(facturaInstanceList!=null && facturaInstanceList.size()!=0){
+			def facturaInstance=facturaInstanceList.get(0)
+			render(view: "edit", model: [facturaInstance: facturaInstance])
+		}
+		else{
+			flash.message = message(code: 'factura.nFactura.noEncontrado')
+			render(view: "list", model:[facturaInstanceList: Factura.list(params), facturaInstanceTotal: Factura.count()])
+		}
+		
+		
 	}
 	
 }

@@ -7,8 +7,7 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 		<g:javascript library="jquery" plugin="jquery" />
 		<r:require module="jquery-ui"/>
-    	<jqui:resources theme="darkness" />
-    	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    	
 	</head>
 	<body>
 		<a href="#create-factura" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
