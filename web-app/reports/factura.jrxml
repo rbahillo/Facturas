@@ -349,12 +349,12 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement uuid="a1fef5bf-8517-4000-999c-453b0b4e99eb" x="20" y="106" width="80" height="20"/>
+				<reportElement uuid="a1fef5bf-8517-4000-999c-453b0b4e99eb" x="20" y="154" width="80" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="ed89a2d3-761b-4d7e-a126-d22eacf8684a" x="100" y="107" width="40" height="20"/>
+				<reportElement uuid="ed89a2d3-761b-4d7e-a126-d22eacf8684a" x="100" y="155" width="40" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
