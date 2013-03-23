@@ -136,4 +136,32 @@ class ClienteController {
 			}
 		  render clienteSelectList as JSON
 	}
+	
+	def load(){
+		new File("./clientes.csv").splitEachLine("\\|") { token ->
+			//CIF,NOMBRE,DIRECCION,POBLACION,PROVINCIA,TLF,FAX,PAGARE
+			def cif = token[0]?.trim()
+			def empresa = token[1]?.trim()
+			def direccion = token[2]?.trim()
+			def poblacion = token[3]?.trim()
+			def provincia = token[4]?.trim()
+			def tlf = token[5]?.trim()
+			def fax = token[6]?.trim()
+			def pagare = token[7]?.trim()
+			if(pagare==null || pagare.isEmpty())
+				pagare=30
+			
+			def cliente = new Cliente()
+			cliente.setDireccion(direccion)
+			cliente.setEmpresa(empresa)
+			cliente.setFax(fax)
+			cliente.setNif(cif)
+			cliente.setPagare(new Integer(pagare))
+			cliente.setPais("Espa–a")
+			cliente.setPoblacion(poblacion)
+			cliente.setProvincia(provincia)
+			cliente.setTelefono(tlf)
+			cliente.save(flush: true)
+		}
+	}
 }

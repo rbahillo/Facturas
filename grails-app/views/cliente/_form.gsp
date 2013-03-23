@@ -18,18 +18,16 @@
 	<g:textField name="empresa" required="" value="${clienteInstance?.empresa}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clienteInstance, field: 'nombre', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: clienteInstance, field: 'nombre', 'error')}">
 	<label for="nombre">
 		<g:message code="cliente.nombre.label" default="Nombre" />
-		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="nombre" required="" value="${clienteInstance?.nombre}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clienteInstance, field: 'apellidos', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: clienteInstance, field: 'apellidos', 'error')}">
 	<label for="apellidos">
 		<g:message code="cliente.apellidos.label" default="Apellidos" />
-		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="apellidos" required="" value="${clienteInstance?.apellidos}"/>
 </div>
@@ -42,10 +40,9 @@
 	<g:textField name="direccion" required="" value="${clienteInstance?.direccion}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clienteInstance, field: 'cp', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: clienteInstance, field: 'cp', 'error')}">
 	<label for="cp">
 		<g:message code="cliente.cp.label" default="Cp" />
-		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="cp" required="" value="${clienteInstance?.cp}"/>
 </div>
@@ -88,5 +85,13 @@
 		
 	</label>
 	<g:textField name="movil" value="${clienteInstance?.movil}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: clienteInstance, field: 'fax', 'error')} ">
+	<label for="movil">
+		<g:message code="cliente.fax.label" default="Fax" />
+		
+	</label>
+	<g:textField name="fax" value="${clienteInstance?.fax}"/>
 </div>
 
